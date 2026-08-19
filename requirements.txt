@@ -1,0 +1,5 @@
+pytest==8.4.1
+requests==2.32.4
+jsonschema==4.25.1
+bandit==1.8.6
+pip-audit==2.9.0
