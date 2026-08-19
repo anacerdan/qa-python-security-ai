@@ -1,0 +1,27 @@
+name: QA Quality Gates
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run automated tests
+        run: pytest -q
+
+      - name: Run Bandit security scan
+        run: bandit -r 07-secure-python/src -ll
+
+      - name: Audit dependencies
+        run: pip-audit -r requirements.txt
